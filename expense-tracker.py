@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 
-# Create a DataFrame to store expenses
+# Load existing expenses data if available
 expenses = pd.DataFrame(columns=["Date", "Category", "Amount", "Comment"])
 
 # Sidebar for user input
@@ -14,7 +14,8 @@ amount = st.sidebar.number_input("Amount ($)", value=0.0, step=1.0)
 comment = st.sidebar.text_input("Comment", "")
 
 if st.sidebar.button("Add Expense"):
-    expenses = expenses.append({"Date": date, "Category": category, "Amount": amount, "Comment": comment}, ignore_index=True)
+    new_expense = {"Date": date, "Category": category, "Amount": amount, "Comment": comment}
+    expenses = expenses.append(new_expense, ignore_index=True)
 
 # Display expenses table
 st.header("Expenses")
@@ -32,6 +33,3 @@ st.sidebar.write(f"${total_expenses:.2f}")
 
 # Optional: Save the expenses data to a CSV file
 # expenses.to_csv("expenses.csv", index=False)
-
-
-
