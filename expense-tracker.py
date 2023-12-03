@@ -31,7 +31,7 @@ st.sidebar.subheader("Total Expenses")
 st.sidebar.write(f"${total_expenses:.2f}")
 
 # Optional: Save the expenses data to a CSV file
-expenses.to_csv("expenses.csv", index=False)
+# expenses.to_csv("expenses.csv", index=False)
 
 
 
