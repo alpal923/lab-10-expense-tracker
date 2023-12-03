@@ -2,8 +2,9 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 
-# Initialize an empty list to store expenses
-expenses = []
+# Initialize an empty list to store expenses or retrieve it from session state
+if 'expenses' not in st.session_state:
+    st.session_state.expenses = []
 
 # Sidebar for user input
 st.sidebar.header("Expense Tracker")
@@ -15,11 +16,11 @@ comment = st.sidebar.text_input("Comment", "")
 
 if st.sidebar.button("Add Expense"):
     new_expense = {"Date": date, "Category": category, "Amount": amount, "Comment": comment}
-    expenses.append(new_expense)
+    st.session_state.expenses.append(new_expense)
 
 # Display expenses table as a DataFrame
 st.header("Expenses")
-expenses_df = pd.DataFrame(expenses)
+expenses_df = pd.DataFrame(st.session_state.expenses)
 st.dataframe(expenses_df)
 
 # Check if "Amount" column exists before calculating the total expenses
