@@ -35,4 +35,3 @@ if "Category" in expenses_df.columns:
     category_expenses = expenses_df.groupby("Category")["Amount"].sum().reset_index()
     fig = px.pie(category_expenses, values="Amount", names="Category", title="Expense Distribution")
     st.plotly_chart(fig)
-
