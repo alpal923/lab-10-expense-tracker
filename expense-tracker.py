@@ -22,6 +22,13 @@ st.header("Expenses")
 expenses_df = pd.DataFrame(expenses)
 st.dataframe(expenses_df)
 
+# Check if "Amount" column exists before calculating the total expenses
+if "Amount" in expenses_df.columns:
+    # Total expenses
+    total_expenses = expenses_df["Amount"].sum()
+    st.sidebar.subheader("Total Expenses")
+    st.sidebar.write(f"${total_expenses:.2f}")
+
 # Check if "Category" column exists before grouping
 if "Category" in expenses_df.columns:
     # Interactive chart to show expenses by category
@@ -29,10 +36,3 @@ if "Category" in expenses_df.columns:
     fig = px.pie(category_expenses, values="Amount", names="Category", title="Expense Distribution")
     st.plotly_chart(fig)
 
-# Total expenses
-total_expenses = expenses_df["Amount"].sum()
-st.sidebar.subheader("Total Expenses")
-st.sidebar.write(f"${total_expenses:.2f}")
-
-# Optional: Save the expenses data to a CSV file
-# expenses_df.to_csv("expenses.csv", index=False)
